@@ -8,11 +8,11 @@
 		<version>3.2.3</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.heemcode.demo</groupId>
-	<artifactId>_01_spring_boot_devtools</artifactId>
+	<groupId>com.heemcode</groupId>
+	<artifactId>_01_java_spring_core_constructor_injection</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>_01_spring_boot_devtools</name>
-	<description>_01_spring_boot_devtools</description>
+	<name>_01_java_spring_core_constructor_injection</name>
+	<description>_01_java_spring_core_constructor_injection</description>
 	<properties>
 		<java.version>17</java.version>
 	</properties>
@@ -21,11 +21,11 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
 		</dependency>
-
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

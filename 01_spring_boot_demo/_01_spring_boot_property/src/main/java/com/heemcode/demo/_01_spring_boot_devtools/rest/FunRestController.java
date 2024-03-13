@@ -13,6 +13,16 @@ public class FunRestController {
     @Value("${team.name}")
     private String teamName;
 
+    @GetMapping("/teaminfo")
+    public String getTeaminfo() {
+        return "Couch: " + couchName + " Team: " + teamName;
+    }
+
+    @GetMapping("/test")
+    public String getTest() {
+        return "test: ";
+    }
+
     @GetMapping("/")
     public String sayHello() {
         return "Hello World!";
