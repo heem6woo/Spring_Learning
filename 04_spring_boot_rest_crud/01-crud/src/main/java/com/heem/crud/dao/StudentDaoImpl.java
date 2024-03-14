@@ -33,8 +33,10 @@ public class StudentDaoImpl implements StudentDao{
     }
 
     @Override
-    public Student findById(int id) {
+    public Student findById(int id) throws IllegalArgumentException {
+
         return entityManager.find(Student.class, id);
+
     }
 
     @Override
