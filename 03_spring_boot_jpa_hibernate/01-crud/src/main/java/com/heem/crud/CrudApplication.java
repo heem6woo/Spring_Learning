@@ -22,7 +22,18 @@ public class CrudApplication {
 
             createMultiplestudent(studentDao);
 
-            findStudent(studentDao, 1);
+            //findStudent(studentDao, 1);
+
+            //queryForStudents(studentDao);
+
+            //queryForStudentsByLastName(studentDao, "Woo");
+
+            //updateStudent(studentDao);
+
+            //removeStudentById(studentDao, 1);
+
+            removeAllStudent(studentDao);
+
         };
     }
 
@@ -73,4 +84,58 @@ public class CrudApplication {
 
     }
 
+    private void queryForStudents(StudentDao studentDao) {
+        //
+        System.out.println("Find every students in the school");
+        System.out.println(studentDao.findAll());
+    }
+
+    private void queryForStudentsByLastName(StudentDao studentDao, String lastName) {
+        System.out.println("Find every students with lastname: " + lastName );
+        for( Student student: studentDao.findByLastName(lastName)){
+            System.out.println(student);
+        }
+    }
+
+    private void updateStudentFirstNameById(StudentDao studentDao, int id, String firstname) {
+        Student theStudent = studentDao.findById(id);
+
+        System.out.println("Updating firstname of " + theStudent.getFirstName() + " " + theStudent.getLastName());
+
+        theStudent.setFirstName(firstname);
+
+        System.out.println("Updated to " + theStudent.getFirstName() + " " + theStudent.getLastName());
+
+        studentDao.update(theStudent);
+    }
+
+
+
+    private void updateStudent(StudentDao studentDao) {
+
+        int id = 1;
+        Student theStudent = studentDao.findById(id);
+
+        System.out.println("Updating Student");
+        theStudent.setFirstName("Scooby");
+
+        studentDao.update(theStudent);
+        System.out.println(theStudent);
+
+    }
+
+    private void removeStudentById(StudentDao studentDao, int id) {
+
+        System.out.println("Delete the student with ID: " + id);
+        studentDao.delete(id);
+
+    }
+
+    private void removeAllStudent(StudentDao studentDao) {
+
+        System.out.println("Removing every students ...");
+        int numRowsDeleted = studentDao.deleteAll();
+
+        System.out.println("Number of Rows deleted: " + numRowsDeleted);
+    }
 }
