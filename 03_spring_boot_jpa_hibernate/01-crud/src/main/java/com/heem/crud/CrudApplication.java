@@ -32,7 +32,7 @@ public class CrudApplication {
 
             //removeStudentById(studentDao, 1);
 
-            removeAllStudent(studentDao);
+            //removeAllStudent(studentDao);
 
         };
     }
