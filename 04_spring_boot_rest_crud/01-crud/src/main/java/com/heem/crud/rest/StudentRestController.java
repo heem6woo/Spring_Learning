@@ -19,6 +19,8 @@ public class StudentRestController {
     public StudentRestController(StudentDao studentDao) {
         myStudentDao = studentDao;
     }
+    /*
+    ExceptionHandler is moved to Golbe handelr(StudnetRestExceptionHandler)
 
     @ExceptionHandler
     public ResponseEntity<StudentErrorResponse> notFoundExceptionHandler(StudentNotFoundException ex) {
@@ -41,6 +43,8 @@ public class StudentRestController {
 
         return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
     }
+
+     */
 
 
     // defines endpoist for "/students"
