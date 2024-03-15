@@ -37,9 +37,9 @@ public class StudentRestController {
 
         error.setMessage(ex.getMessage());
         error.setTimeStamp(System.currentTimeMillis());
-        error.setStatus(HttpStatus.NOT_FOUND.value());
+        error.setStatus(HttpStatus.BAD_REQUEST.value());
 
-        return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
     }
 
 
@@ -51,14 +51,13 @@ public class StudentRestController {
 
     @GetMapping("/students/{studentId}")
     public Student getStudent(@PathVariable int studentId) {
-        Student tempStudent;
+        Student tempStudent = myStudentDao.findById(studentId);;
 
-        try {
-            tempStudent = myStudentDao.findById(studentId);
-            return tempStudent;
-        } catch (EntityNotFoundException ex) {
+        if (tempStudent == null) {
             throw new StudentNotFoundException("Student ID: " + studentId +" is not found!");
         }
+        return tempStudent;
+
     }
 
 }
