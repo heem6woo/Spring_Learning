@@ -1,5 +1,6 @@
 package com.heem.spring_mvc_with_validation;
 
+import com.heem.spring_mvc_with_validation.validation.CourseCode;
 import jakarta.validation.constraints.*;
 
 public class Customer {
@@ -20,8 +21,20 @@ public class Customer {
     @Pattern(regexp = "^[a-zA-Z0-9]{5}", message = "only 5 chars/digits")
     private String postalCode;
 
+    @NotNull(message = "is requierd")
+    @CourseCode(value = "TOPS", message = "coursecode should start with TOPS")
+    private String courseCode;
+
     public Customer() {
 
+    }
+
+    public String getCourseCode() {
+        return courseCode;
+    }
+
+    public void setCourseCode(String courseCode) {
+        this.courseCode = courseCode;
     }
 
     public String getPostalCode() {
