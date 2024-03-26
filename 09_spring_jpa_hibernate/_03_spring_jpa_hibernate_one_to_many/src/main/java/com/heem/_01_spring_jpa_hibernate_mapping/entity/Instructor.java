@@ -35,16 +35,17 @@ public class Instructor {
     @Column(name="email")
     private String email;
 
-
-    @OneToOne(cascade =  CascadeType.ALL)
+    @OneToOne( cascade =  CascadeType.ALL)
     @JoinColumn(name="instructor_detail_id")
     private InstructorDetail instructorDetail;
 
 
-    @OneToMany(mappedBy = "instructor",
+    // default LAZY
+    // can occur errow when called in findInstructorWithCourses
+    // have to be LAZY without query in DAO
+    @OneToMany(mappedBy = "instructor", fetch = FetchType.LAZY,
             cascade = {CascadeType.DETACH, CascadeType.MERGE,
                         CascadeType.PERSIST, CascadeType.REFRESH})
-
     private List<Course> courses;
 
     // create construtors
