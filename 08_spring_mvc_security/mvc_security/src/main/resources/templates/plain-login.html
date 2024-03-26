@@ -14,6 +14,12 @@
 
 <form action="#" th:action="@{/authenticateTheUser}" method="POST">
 
+    <div th:if="${param.logout}">
+        <i>
+            You have been logout.
+        </i>
+    </div>
+
 
     <!-- Check for login error-->
 
