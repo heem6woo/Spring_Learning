@@ -1,8 +1,12 @@
-package com.luv2code.aopdemo.dao;
+package com.heem.aopdemo.dao;
 
-import com.luv2code.aopdemo.Account;
+import com.heem.aopdemo.Account;
+
+import java.util.List;
 
 public interface AccountDAO {
+
+    public List<Account> findAccounts();
 
     void addAccount(Account theAccount, boolean vipFlag);
 
@@ -15,4 +19,6 @@ public interface AccountDAO {
     public String getServiceCode();
 
     public void setServiceCode(String serviceCode);
+
+
 }

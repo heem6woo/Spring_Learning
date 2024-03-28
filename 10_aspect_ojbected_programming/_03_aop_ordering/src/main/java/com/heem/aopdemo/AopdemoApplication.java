@@ -1,11 +1,13 @@
-package com.luv2code.aopdemo;
+package com.heem.aopdemo;
 
-import com.luv2code.aopdemo.dao.AccountDAO;
-import com.luv2code.aopdemo.dao.MembershipDAO;
+import com.heem.aopdemo.dao.AccountDAO;
+import com.heem.aopdemo.dao.MembershipDAO;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+
+import java.util.List;
 
 @SpringBootApplication
 public class AopdemoApplication {
@@ -19,8 +21,20 @@ public class AopdemoApplication {
 
 		return runner -> {
 
-			demoTheBeforeAdvice(theAccountDAO, theMembershipDAO);
+			//demoTheBeforeAdvice(theAccountDAO, theMembershipDAO);
+			demoTheAfterReturningAdvice(theAccountDAO);
 		};
+	}
+
+	private void demoTheAfterReturningAdvice(AccountDAO theAccountDemo) {
+		List<Account> theAccounts = theAccountDemo.findAccounts();
+
+		System.out.println("\n\nMain Program: demoTheAfterReturningAdvice");
+		System.out.println("----");
+
+		System.out.println(theAccounts);
+
+		System.out.println("\n");
 	}
 
 	private void demoTheBeforeAdvice(AccountDAO theAccountDAO, MembershipDAO theMembershipDAO) {

@@ -1,4 +1,4 @@
-package com.luv2code.aopdemo.dao;
+package com.heem.aopdemo.dao;
 
 public interface MembershipDAO {
 

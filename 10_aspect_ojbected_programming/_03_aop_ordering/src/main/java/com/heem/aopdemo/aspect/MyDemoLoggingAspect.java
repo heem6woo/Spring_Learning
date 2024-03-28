@@ -1,19 +1,52 @@
-package com.luv2code.aopdemo.aspect;
+package com.heem.aopdemo.aspect;
 
-import com.luv2code.aopdemo.Account;
+import com.heem.aopdemo.Account;
 import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Aspect
 @Component
 @Order(2)
 public class MyDemoLoggingAspect {
 
-    @Before("com.luv2code.aopdemo.aspect.LuvAopExpressions.forDaoPackageNoGetterSetter()")
+
+
+    @AfterReturning(
+            pointcut = "execution(* com.heem.aopdemo.dao.AccountDAO.findAccounts(..))",
+            returning = "result"
+    )
+    public void afterReturningFindAccountsAdvice(JoinPoint theJoinPoint, List<Account> result) {
+
+        // which method
+        String method = theJoinPoint.getSignature().toShortString();
+        System.out.println("\n====>> Executing @AfterReturning on method: + " + method);
+
+        // results
+        System.out.println("\n====>> result is: " + result);
+
+        // modify result list
+
+        if (!result.isEmpty()) {
+            Account temp = result.get(0);
+
+            temp.setName("Heem");
+
+        }
+
+        // results
+        System.out.println("\n====>> Modified result is: " + result);
+
+
+    }
+
+    @Before("com.heem.aopdemo.aspect.LuvAopExpressions.forDaoPackageNoGetterSetter()")
     public void beforeAddAccountAdvice(JoinPoint theJointPoint) {
         System.out.println("\n=====>>> Executing @Before advice on method");
 
