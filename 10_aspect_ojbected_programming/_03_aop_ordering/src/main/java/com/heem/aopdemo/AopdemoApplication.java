@@ -27,8 +27,13 @@ public class AopdemoApplication {
 	}
 
 	private void demoTheAfterReturningAdvice(AccountDAO theAccountDemo) {
-		List<Account> theAccounts = theAccountDemo.findAccounts();
-
+		List<Account> theAccounts = null;
+		try {
+			boolean tripWire = true;
+			theAccounts = theAccountDemo.findAccounts(tripWire);
+		} catch (Exception exc) {
+			System.out.println("\n\nMain Program: caught Exception: " + exc);
+		}
 		System.out.println("\n\nMain Program: demoTheAfterReturningAdvice");
 		System.out.println("----");
 

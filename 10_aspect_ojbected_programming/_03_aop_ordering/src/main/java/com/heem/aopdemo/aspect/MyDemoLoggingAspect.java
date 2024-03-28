@@ -3,6 +3,7 @@ package com.heem.aopdemo.aspect;
 import com.heem.aopdemo.Account;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
+import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.reflect.MethodSignature;
@@ -16,6 +17,23 @@ import java.util.List;
 @Order(2)
 public class MyDemoLoggingAspect {
 
+    @AfterThrowing(
+            pointcut = "execution(* com.heem.aopdemo.dao.AccountDAO.findAccounts(..))",
+            throwing = "theExc"
+    )
+    public void afterThrowingFindAccountsAdvice(
+            JoinPoint theJoinPoint, Throwable theExc) {
+
+        // print
+        // which method
+        String method = theJoinPoint.getSignature().toShortString();
+        System.out.println("\n====>> Executing @AfterThrowing on method: + " + method);
+
+        // results
+        System.out.println("\n====>> Exception is: " + theExc.getMessage());
+
+
+    }
 
 
     @AfterReturning(
@@ -45,6 +63,7 @@ public class MyDemoLoggingAspect {
 
 
     }
+
 
     @Before("com.heem.aopdemo.aspect.LuvAopExpressions.forDaoPackageNoGetterSetter()")
     public void beforeAddAccountAdvice(JoinPoint theJointPoint) {

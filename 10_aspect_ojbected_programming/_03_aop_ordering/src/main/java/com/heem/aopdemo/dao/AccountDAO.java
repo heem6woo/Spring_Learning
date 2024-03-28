@@ -8,6 +8,8 @@ public interface AccountDAO {
 
     public List<Account> findAccounts();
 
+    public List<Account> findAccounts(boolean tripWire);
+
     void addAccount(Account theAccount, boolean vipFlag);
 
     boolean doWork();
