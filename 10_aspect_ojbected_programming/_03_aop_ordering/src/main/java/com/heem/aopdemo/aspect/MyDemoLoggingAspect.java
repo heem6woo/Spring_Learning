@@ -2,10 +2,8 @@ package com.heem.aopdemo.aspect;
 
 import com.heem.aopdemo.Account;
 import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.annotation.AfterReturning;
-import org.aspectj.lang.annotation.AfterThrowing;
-import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
+import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.*;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
@@ -16,6 +14,47 @@ import java.util.List;
 @Component
 @Order(2)
 public class MyDemoLoggingAspect {
+
+    @Around("execution(* com.heem.aopdemo.service.*.getFortune(..))")
+    public Object aroundGetFortune(
+            ProceedingJoinPoint theProceedingJoinPoint) throws Throwable {
+
+        String method = theProceedingJoinPoint.getSignature().toShortString();
+        System.out.println("\n====>> Executing @Around(before proceed) on method: " + method);
+        // before
+        Object result = null;
+        long begin = System.currentTimeMillis();
+        try {
+            result = theProceedingJoinPoint.proceed();
+
+        } catch (Exception exc) {
+            System.out.println("Exception is caught: ");
+            //result = "ERROR";
+            // rethrow exception
+
+            throw exc;
+        }
+        // after
+        long end = System.currentTimeMillis();
+
+        long duration = end - begin;
+
+        System.out.println("\n=====> Duration: " + duration + " milliseconds");
+
+
+        return result;
+    }
+
+
+
+    @After("execution(* com.heem.aopdemo.dao.AccountDAO.findAccounts(..))")
+    public void afterFinallyFindAccountAdvice(JoinPoint theJoinPoint) {
+        // which method
+        String method = theJoinPoint.getSignature().toShortString();
+        System.out.println("\n====>> Executing @After (finally) on method: + " + method);
+
+
+    }
 
     @AfterThrowing(
             pointcut = "execution(* com.heem.aopdemo.dao.AccountDAO.findAccounts(..))",
